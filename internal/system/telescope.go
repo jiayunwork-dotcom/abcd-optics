@@ -36,7 +36,7 @@ func AnalyzeTelescope(f1, f2, spacing float64) (Telescope, error) {
 	if afocal {
 		mag = -f2 / f1
 	}
-	return Telescope{
+	return fillTele(Telescope{
 		F1:            f1,
 		F2:            f2,
 		Spacing:       spacing,
@@ -44,7 +44,7 @@ func AnalyzeTelescope(f1, f2, spacing float64) (Telescope, error) {
 		Afocal:        afocal,
 		Magnification: mag,
 		IdealSpacing:  f1 + f2,
-	}, nil
+	}), nil
 }
 
 func (t Telescope) AfocalError() float64 {
