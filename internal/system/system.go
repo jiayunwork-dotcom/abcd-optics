@@ -19,6 +19,7 @@ func Compose(spec element.Spec) (System, error) {
 	for _, e := range spec.Elements {
 		matrices = append(matrices, e.Matrix())
 	}
+	bindMatrices(matrices)
 	return System{
 		Spec:     spec,
 		Matrices: matrices,
