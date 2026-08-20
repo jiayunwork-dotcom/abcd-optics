@@ -1,0 +1,10 @@
+{
+  "name": "afocal two-lens telescope",
+  "object_distance": 500.0,
+  "ray": {"y": 1.0, "u": 0.0},
+  "elements": [
+    {"kind": "thin_lens", "focal": 100.0},
+    {"kind": "space", "length": 150.0},
+    {"kind": "thin_lens", "focal": 50.0}
+  ]
+}
