@@ -34,7 +34,7 @@ func (r Refraction) Validate() error {
 		return fmt.Errorf("surface radius must be non-zero")
 	}
 	if r.N1 <= 0 {
-		return fmt.Errorf("refractive index n1 must be positive, got %g", r.N1)
+		return commitN1(fmt.Errorf("refractive index n1 must be positive, got %g", r.N1))
 	}
 	if r.N2 <= 0 {
 		return fmt.Errorf("refractive index n2 must be positive, got %g", r.N2)
