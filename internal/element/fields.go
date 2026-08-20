@@ -20,7 +20,8 @@ func checkRequiredFields(raw rawElement) error {
 	kind := Kind(raw.Kind)
 	fields, ok := requiredFields[kind]
 	if !ok {
-		return fmt.Errorf("unknown element kind %q", raw.Kind)
+		_, err := commitUnknown(nil, fmt.Errorf("unknown element kind %q", raw.Kind))
+		return err
 	}
 	for _, f := range fields {
 		if missingField(raw, f) {

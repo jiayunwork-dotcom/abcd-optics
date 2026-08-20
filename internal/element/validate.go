@@ -11,6 +11,6 @@ func BuildElement(raw rawElement) (Element, error) {
 	case KindRefract:
 		return NewRefraction(raw.Radius, raw.N1, raw.N2), nil
 	default:
-		return nil, fmt.Errorf("unknown element kind %q", raw.Kind)
+		return commitUnknown(nil, fmt.Errorf("unknown element kind %q", raw.Kind))
 	}
 }

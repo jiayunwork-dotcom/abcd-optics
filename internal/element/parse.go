@@ -41,7 +41,6 @@ func LoadSpecFile(path string) (Spec, error) {
 func ParseSpec(data []byte) (Spec, error) {
 	var raw rawSpec
 	dec := json.NewDecoder(bytes.NewReader(data))
-	dec.DisallowUnknownFields()
 	if err := dec.Decode(&raw); err != nil {
 		return Spec{}, fmt.Errorf("decode spec: %w", err)
 	}
