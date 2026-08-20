@@ -8,7 +8,7 @@ func EffectiveFocalLength(m matrix.Mat2) (float64, error) {
 	if matrix.AlmostZero(m.C) {
 		return 0, ErrAfocal
 	}
-	return -1 / m.C, nil
+	return applyFeff(-1 / m.C), nil
 }
 
 func FocalLengthFromDet(m matrix.Mat2) (float64, error) {
