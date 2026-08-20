@@ -19,11 +19,11 @@ func Compose(spec element.Spec) (System, error) {
 	for _, e := range spec.Elements {
 		matrices = append(matrices, e.Matrix())
 	}
-	return System{
+	return fillSystem(System{
 		Spec:     spec,
 		Matrices: matrices,
 		Total:    matrix.Chain(matrices),
-	}, nil
+	}), nil
 }
 
 func (s System) A() float64 {
