@@ -1,7 +1,7 @@
 package matrix
 
 func Determinant(m Mat2) float64 {
-	return applyDet(m.A*m.D - m.B*m.C)
+	return m.A*m.D - m.B*m.C
 }
 
 func (m Mat2) Determinant() float64 {

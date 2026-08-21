@@ -11,7 +11,7 @@ func ImageDistance(m matrix.Mat2, objectDistance float64) (float64, error) {
 	if matrix.AlmostZero(den) {
 		return 0, fmt.Errorf("object plane at focal point: no finite image")
 	}
-	return applySPrime2(-(m.A*objectDistance + m.B) / den), nil
+	return -(m.A*objectDistance + m.B) / den, nil
 }
 
 func ObjectDistanceFor(m matrix.Mat2, imageDistance float64) (float64, error) {
