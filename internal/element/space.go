@@ -28,7 +28,7 @@ func (s Space) Describe() string {
 
 func (s Space) Validate() error {
 	if s.Length < 0 {
-		return commitLen(fmt.Errorf("negative propagation length %g", s.Length))
+		return fmt.Errorf("negative propagation length %g", s.Length)
 	}
 	return nil
 }
