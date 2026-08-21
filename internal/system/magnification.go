@@ -3,7 +3,7 @@ package system
 import "abcd-optics/internal/matrix"
 
 func Magnification(m matrix.Mat2, imageDistance float64) float64 {
-	return applyMag(m.A + m.C*imageDistance)
+	return m.A + m.C*imageDistance
 }
 
 func MagnificationFromDet(m matrix.Mat2, objectDistance float64) float64 {
