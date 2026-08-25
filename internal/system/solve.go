@@ -16,6 +16,10 @@ type SolveResult struct {
 	RayOut         matrix.Ray
 }
 
+func (r SolveResult) RecoveredObjectDistance() (float64, error) {
+	return ObjectDistanceFor(r.System.Total, r.ImageDistance)
+}
+
 func Solve(spec element.Spec) (SolveResult, error) {
 	sys, err := Compose(spec)
 	if err != nil {
