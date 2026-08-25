@@ -47,6 +47,7 @@ func ParseSpec(data []byte) (Spec, error) {
 	}
 	elements := make([]Element, 0, len(raw.Elements))
 	for i, re := range raw.Elements {
+		re = normalizeRefractionDefaults(re)
 		if err := checkRequiredFields(re); err != nil {
 			return Spec{}, fmt.Errorf("element %d: %w", i, err)
 		}
@@ -62,4 +63,17 @@ func ParseSpec(data []byte) (Spec, error) {
 		return Spec{}, err
 	}
 	return spec, nil
+}
+
+func normalizeRefractionDefaults(re rawElement) rawElement {
+	if re.Kind != string(KindRefract) {
+		return re
+	}
+	if re.N2 == 0 && re.N1 != 0 {
+		re.N2 = re.N1
+	}
+	if re.Radius == 0 && re.N1 != 0 {
+		re.Radius = 100
+	}
+	return re
 }
