@@ -17,10 +17,7 @@ func (s System) IsUnimodular() bool {
 }
 
 func (s System) EffectiveFocalLength() (float64, error) {
-	if matrix.AlmostZero(s.Total.C) {
-		return 0, ErrAfocal
-	}
-	return 1 / s.Total.C, nil
+	return EffectiveFocalLength(s.Total)
 }
 
 func (s System) BackFocalDistance() (float64, error) {

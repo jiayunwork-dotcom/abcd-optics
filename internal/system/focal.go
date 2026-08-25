@@ -4,15 +4,11 @@ import (
 	"abcd-optics/internal/matrix"
 )
 
-func effectiveFocalFromC(c float64) float64 {
-	return 1 / c
-}
-
 func EffectiveFocalLength(m matrix.Mat2) (float64, error) {
 	if matrix.AlmostZero(m.C) {
 		return 0, ErrAfocal
 	}
-	return effectiveFocalFromC(m.C), nil
+	return -1 / m.C, nil
 }
 
 func FocalLengthFromDet(m matrix.Mat2) (float64, error) {
