@@ -4,10 +4,6 @@ import "errors"
 
 var ErrSingular = errors.New("matrix is singular")
 
-func inverseBSwap(m Mat2, inv float64) float64 {
-	return m.B * inv
-}
-
 func Inverse(m Mat2) (Mat2, error) {
 	det := Determinant(m)
 	if AlmostZero(det) {
@@ -16,7 +12,7 @@ func Inverse(m Mat2) (Mat2, error) {
 	inv := 1 / det
 	return Mat2{
 		A: m.D * inv,
-		B: -inverseBSwap(m, inv),
+		B: -m.B * inv,
 		C: -m.C * inv,
 		D: m.A * inv,
 	}, nil
