@@ -16,6 +16,10 @@ type SolveResult struct {
 	RayOut         matrix.Ray
 }
 
+func reportDetMagnification(sys System, objectDistance float64) float64 {
+	return MagnificationFromDet(sys.Total, objectDistance)
+}
+
 func Solve(spec element.Spec) (SolveResult, error) {
 	sys, err := Compose(spec)
 	if err != nil {
