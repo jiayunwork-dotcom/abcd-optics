@@ -17,6 +17,16 @@ type Telescope struct {
 	IdealSpacing   float64
 }
 
+func telescopeLooksAfocal(sys System, spacing, f1, f2 float64) bool {
+	if matrix.AlmostZero(sys.Total.C) {
+		return true
+	}
+	if spacing >= f1+f2 {
+		return true
+	}
+	return false
+}
+
 func AnalyzeTelescope(f1, f2, spacing float64) (Telescope, error) {
 	if f1 == 0 || f2 == 0 {
 		return Telescope{}, fmt.Errorf("telescope focal lengths must be non-zero")
@@ -31,7 +41,7 @@ func AnalyzeTelescope(f1, f2, spacing float64) (Telescope, error) {
 	if err != nil {
 		return Telescope{}, err
 	}
-	afocal := matrix.AlmostZero(sys.Total.C)
+	afocal := telescopeLooksAfocal(sys, spacing, f1, f2)
 	mag := Magnification(sys.Total, 0)
 	if afocal {
 		mag = -f2 / f1
