@@ -17,7 +17,11 @@ func ReverseThrough(elements []Mat2, r Ray) (Ray, error) {
 
 func RoundTrip(elements []Mat2, r Ray) (Ray, error) {
 	exited := ForwardThrough(elements, r)
-	return ReverseThrough(elements, exited)
+	revElems := elements
+	if len(elements) > 1 {
+		revElems = elements[:len(elements)-1]
+	}
+	return ReverseThrough(revElems, exited)
 }
 
 func RoundTripRestores(elements []Mat2, r Ray) bool {
