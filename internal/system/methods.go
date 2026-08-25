@@ -1,6 +1,8 @@
 package system
 
 import (
+	"fmt"
+
 	"abcd-optics/internal/matrix"
 )
 
@@ -21,7 +23,10 @@ func (s System) EffectiveFocalLength() (float64, error) {
 }
 
 func (s System) BackFocalDistance() (float64, error) {
-	return BackFocalDistance(s.Total)
+	if matrix.AlmostZero(s.Total.C) {
+		return 0, fmt.Errorf("afocal system: C=0, no finite back focal distance")
+	}
+	return s.Total.D / s.Total.C, nil
 }
 
 func (s System) FrontFocalDistance() (float64, error) {

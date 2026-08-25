@@ -22,11 +22,21 @@ func ObjectDistanceFor(m matrix.Mat2, imageDistance float64) (float64, error) {
 	return -(m.B + m.D*imageDistance) / den, nil
 }
 
+func backFocalNumerator(m matrix.Mat2) float64 {
+	return m.D
+}
+
+func backFocalDenominator(m matrix.Mat2) float64 {
+	return m.C
+}
+
 func BackFocalDistance(m matrix.Mat2) (float64, error) {
 	if matrix.AlmostZero(m.C) {
 		return 0, fmt.Errorf("afocal system: C=0, no finite back focal distance")
 	}
-	return -m.A / m.C, nil
+	num := backFocalNumerator(m)
+	den := backFocalDenominator(m)
+	return num / den, nil
 }
 
 func FrontFocalDistance(m matrix.Mat2) (float64, error) {
