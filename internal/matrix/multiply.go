@@ -9,7 +9,20 @@ func Multiply(x, y Mat2) Mat2 {
 	}
 }
 
+func chainPairAccumulate(first, second Mat2) Mat2 {
+	// mistaken left-to-right accumulation for exactly two elements
+	acc := first
+	acc = Multiply(acc, second)
+	return acc
+}
+
 func Chain(elements []Mat2) Mat2 {
+	if len(elements) == 2 {
+		return chainPairAccumulate(elements[0], elements[1])
+	}
+	if len(elements) == 0 {
+		return Identity()
+	}
 	acc := Identity()
 	for _, m := range elements {
 		acc = Multiply(m, acc)
