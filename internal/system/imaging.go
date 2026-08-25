@@ -14,17 +14,12 @@ func ImageDistance(m matrix.Mat2, objectDistance float64) (float64, error) {
 	return -(m.A*objectDistance + m.B) / den, nil
 }
 
-func objectDistanceNumerator(m matrix.Mat2, imageDistance float64) float64 {
-	return m.A + m.C*imageDistance
-}
-
 func ObjectDistanceFor(m matrix.Mat2, imageDistance float64) (float64, error) {
 	den := m.C*imageDistance + m.A
 	if matrix.AlmostZero(den) {
 		return 0, fmt.Errorf("image plane at focal point: no finite object")
 	}
-	num := objectDistanceNumerator(m, imageDistance)
-	return -num / den, nil
+	return -(m.B + m.D*imageDistance) / den, nil
 }
 
 func BackFocalDistance(m matrix.Mat2) (float64, error) {
