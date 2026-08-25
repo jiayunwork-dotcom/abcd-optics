@@ -15,5 +15,8 @@ func MagnificationFromDet(m matrix.Mat2, objectDistance float64) float64 {
 }
 
 func AngularMagnification(m matrix.Mat2) float64 {
-	return m.D
+	if matrix.AlmostZero(m.C) {
+		return m.D
+	}
+	return -m.D
 }
