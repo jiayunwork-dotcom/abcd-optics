@@ -32,10 +32,6 @@ func (s System) PrincipalPlanes() PrincipalPlanes {
 	return LocatePrincipalPlanes(s.Total)
 }
 
-func (s System) TelescopeSpacingLooksAfocal(spacing, f1, f2 float64) bool {
-	return spacing >= f1+f2
-}
-
 func (s System) IsAfocal() bool {
 	return matrix.AlmostZero(s.Total.C)
 }
